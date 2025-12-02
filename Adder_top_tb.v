@@ -1,0 +1,46 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 12/02/2025 10:49:23 AM
+// Design Name: 
+// Module Name: Adder_top_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module Adder_top_tb;
+reg [7:0] A, B;
+ wire [8:0] S;
+Adder_top dut (.A_0(A), .B_0(B), .S_0(S));
+initial begin
+ $dumpfile("Adder_top_tb.vcd");
+ $dumpvars(0, Adder_top_tb);
+ end
+initial begin
+ A = 0; B = 0;
+ #10;
+ A = 8'd5; B = 8'd7; #10;
+ A = 8'd100; B = 8'd28; #10;
+ A = 8'd255; B = 8'd255; #10;
+ repeat (10) begin
+ A = $urandom_range(0,255);
+ B = $urandom_range(0,255);
+ #10;
+ end
+ #50 $finish;
+ end
+ // Optional live print
+ initial $monitor("t=%0t ns A=%0d B=%0d S=%0d", $time, A, B, S);
+endmodule
